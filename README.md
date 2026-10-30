@@ -1,45 +1,35 @@
-# Claude Skills
+# skill-mercado-pago-claude
 
-Skills para o [Claude Code](https://claude.com/claude-code), nascidas de projetos reais em produção.
-Cada skill guia o Claude por um fluxo completo, com referências, templates e a lista de erros que já custaram caro.
+Skill para o [Claude Code](https://claude.com/claude-code) que guia uma integração completa com o **Mercado Pago (Brasil)**,
+**da criação da conta até a API configurada e no ar**. Nasceu de implementações reais em produção.
 
-> **English:** Skills for Claude Code distilled from production projects. The first one, `mercado-pago`, walks you through
-> a full Mercado Pago (Brazil) integration: account → app → credentials → Pix / cards / subscriptions / marketplace →
-> signed webhooks → sandbox tests → go-live. Content is in Brazilian Portuguese.
-
-## Skills
-
-| Skill | O que faz |
-|---|---|
-| [`mercado-pago`](skills/mercado-pago) | Guia **da criação da conta no Mercado Pago até a API configurada e no ar**: Pix, cartão (Bricks), Checkout Pro, assinaturas recorrentes, marketplace (OAuth), webhook assinado, testes e go-live |
+> **English:** A Claude Code skill that walks you through a full Mercado Pago (Brazil) integration: account → app →
+> credentials → Pix / cards (Bricks) / subscriptions / marketplace (OAuth) → signed webhooks → sandbox tests → go-live.
+> Content is in Brazilian Portuguese.
 
 ## Instalar
 
-Uma skill é uma pasta com um `SKILL.md`. Copie a pasta para o diretório de skills do Claude Code.
+Uma skill é uma pasta com um `SKILL.md`. Clone este repositório direto para a pasta de skills do Claude Code, com o nome `mercado-pago`
+(é o nome do comando `/mercado-pago`).
 
 **Para todos os seus projetos** (nível de usuário):
 
 ```bash
-git clone https://github.com/diegolima87/claude-skills.git
-mkdir -p ~/.claude/skills
-cp -r claude-skills/skills/mercado-pago ~/.claude/skills/
+git clone https://github.com/diegolima87/skill-mercado-pago-claude.git ~/.claude/skills/mercado-pago
 ```
 
 ```powershell
 # Windows (PowerShell)
-git clone https://github.com/diegolima87/claude-skills.git
-New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
-Copy-Item -Recurse claude-skills\skills\mercado-pago "$HOME\.claude\skills\"
+git clone https://github.com/diegolima87/skill-mercado-pago-claude.git "$HOME\.claude\skills\mercado-pago"
 ```
 
-**Só para um projeto** (vai no git do projeto e vale para o time):
+**Só para um projeto** (vale para o time se a pasta for versionada):
 
 ```bash
-mkdir -p .claude/skills
-cp -r /caminho/claude-skills/skills/mercado-pago .claude/skills/
+git clone https://github.com/diegolima87/skill-mercado-pago-claude.git .claude/skills/mercado-pago
 ```
 
-Reinicie o Claude Code (ou abra uma nova sessão) para ele carregar a skill.
+Reinicie o Claude Code (ou abra uma nova sessão). Para atualizar: `git pull` dentro da pasta.
 
 ## Usar
 
@@ -73,10 +63,10 @@ A skill conduz **uma etapa por vez** e para quando a próxima ação é sua:
 
 Ela **não** pede o seu Access Token, Client Secret nem a chave do webhook no chat: você grava direto no `.env`/secrets.
 
-## O que tem dentro de `mercado-pago`
+## O que tem dentro
 
 ```
-skills/mercado-pago/
+.
 ├── SKILL.md                      roteiro guiado (as 8 etapas)
 ├── references/
 │   ├── 01-conta-e-credenciais.md conta, aplicação, credenciais, contas de teste
@@ -99,6 +89,7 @@ skills/mercado-pago/
 - Os padrões marcados com ✅ nas referências vêm de projetos que rodam em produção (Next.js + Supabase, Supabase Edge Functions, Vercel, TanStack Start).
 - Os marcados com 📖 vêm da documentação oficial e **não** foram exercitados por nós; confirme antes de depender deles.
 - Os **templates são ponto de partida**, não uma biblioteca: o Claude adapta ao seu projeto, e você revisa.
+  Passam no type-check, e a validação de assinatura do webhook foi testada em 8 cenários, mas nada foi executado contra a API real do Mercado Pago.
 - A interface do painel do Mercado Pago muda; a skill descreve o *objetivo* de cada passo e remete à documentação oficial.
 - Cartões de teste e regras de tarifas/prazos mudam. Confira na documentação.
 
@@ -109,8 +100,7 @@ Pagamentos envolvem dinheiro e dados pessoais: revise o código gerado, teste em
 
 ## Contribuir
 
-Achou erro, mudança na API ou uma armadilha nova? Abra uma issue ou PR. Para novas skills, crie `skills/<nome>/SKILL.md`
-com `name` e `description` no frontmatter (a `description` é o que faz o Claude acionar a skill) e acrescente à tabela acima.
+Achou erro, mudança na API ou uma armadilha nova? Abra uma issue ou PR.
 
 ## Licença
 
